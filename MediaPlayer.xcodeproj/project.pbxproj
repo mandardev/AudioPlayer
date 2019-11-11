@@ -13,6 +13,12 @@
 		9B13C61C237861770064F83A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B13C61A237861770064F83A /* Main.storyboard */; };
 		9B13C61E237861790064F83A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B13C61D237861790064F83A /* Assets.xcassets */; };
 		9B13C621237861790064F83A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B13C61F237861790064F83A /* LaunchScreen.storyboard */; };
+		9B13C62A237862480064F83A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B13C629237862480064F83A /* AVFoundation.framework */; };
+		9B13C62C2378638B0064F83A /* Saki Saki.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9B13C62B2378638B0064F83A /* Saki Saki.mp3 */; };
+		9B13C632237872A60064F83A /* untitled-font-1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B13C631237872A60064F83A /* untitled-font-1.ttf */; };
+		9B13C633237872BB0064F83A /* untitled-font-1.ttf in Sources */ = {isa = PBXBuildFile; fileRef = 9B13C631237872A60064F83A /* untitled-font-1.ttf */; };
+		9B13C6352378785A0064F83A /* Jogi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9B13C6342378785A0064F83A /* Jogi.mp3 */; };
+		9B13C638237879410064F83A /* Bekhayali.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9B13C637237879410064F83A /* Bekhayali.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,11 @@
 		9B13C61D237861790064F83A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9B13C620237861790064F83A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9B13C622237861790064F83A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B13C629237862480064F83A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9B13C62B2378638B0064F83A /* Saki Saki.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Saki Saki.mp3"; sourceTree = "<group>"; };
+		9B13C631237872A60064F83A /* untitled-font-1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "untitled-font-1.ttf"; sourceTree = "<group>"; };
+		9B13C6342378785A0064F83A /* Jogi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Jogi.mp3; sourceTree = "<group>"; };
+		9B13C637237879410064F83A /* Bekhayali.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Bekhayali.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B13C62A237862480064F83A /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +54,7 @@
 			children = (
 				9B13C613237861770064F83A /* MediaPlayer */,
 				9B13C612237861770064F83A /* Products */,
+				9B13C628237862480064F83A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +69,8 @@
 		9B13C613237861770064F83A /* MediaPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				9B13C6362378787C0064F83A /* AudioSongs */,
+				9B13C631237872A60064F83A /* untitled-font-1.ttf */,
 				9B13C614237861770064F83A /* AppDelegate.swift */,
 				9B13C616237861770064F83A /* SceneDelegate.swift */,
 				9B13C618237861770064F83A /* ViewController.swift */,
@@ -65,6 +80,24 @@
 				9B13C622237861790064F83A /* Info.plist */,
 			);
 			path = MediaPlayer;
+			sourceTree = "<group>";
+		};
+		9B13C628237862480064F83A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9B13C629237862480064F83A /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9B13C6362378787C0064F83A /* AudioSongs */ = {
+			isa = PBXGroup;
+			children = (
+				9B13C62B2378638B0064F83A /* Saki Saki.mp3 */,
+				9B13C6342378785A0064F83A /* Jogi.mp3 */,
+				9B13C637237879410064F83A /* Bekhayali.mp3 */,
+			);
+			path = AudioSongs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +160,10 @@
 			files = (
 				9B13C621237861790064F83A /* LaunchScreen.storyboard in Resources */,
 				9B13C61E237861790064F83A /* Assets.xcassets in Resources */,
+				9B13C62C2378638B0064F83A /* Saki Saki.mp3 in Resources */,
+				9B13C6352378785A0064F83A /* Jogi.mp3 in Resources */,
+				9B13C632237872A60064F83A /* untitled-font-1.ttf in Resources */,
+				9B13C638237879410064F83A /* Bekhayali.mp3 in Resources */,
 				9B13C61C237861770064F83A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +175,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B13C633237872BB0064F83A /* untitled-font-1.ttf in Sources */,
 				9B13C619237861770064F83A /* ViewController.swift in Sources */,
 				9B13C615237861770064F83A /* AppDelegate.swift in Sources */,
 				9B13C617237861770064F83A /* SceneDelegate.swift in Sources */,
