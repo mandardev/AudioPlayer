@@ -21,10 +21,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wZ1-Ml-oif">
-                                <rect key="frame" x="0.0" y="692" width="414" height="70"/>
+                                <rect key="frame" x="0.0" y="582" width="414" height="180"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ppI-Vc-AHg">
-                                        <rect key="frame" x="7.0000000000000071" y="0.0" width="126.66666666666669" height="70"/>
+                                        <rect key="frame" x="7.0000000000000071" y="110" width="126.66666666666669" height="70"/>
                                         <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="vdh-ma-UvS"/>
@@ -38,7 +38,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ETh-Vp-hzC">
-                                        <rect key="frame" x="143.66666666666666" y="0.0" width="126.66666666666666" height="70"/>
+                                        <rect key="frame" x="143.66666666666666" y="110" width="126.66666666666666" height="70"/>
                                         <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="McR-1m-U2C"/>
@@ -52,7 +52,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vv3-rP-z3G">
-                                        <rect key="frame" x="280.33333333333331" y="0.0" width="126.66666666666669" height="70"/>
+                                        <rect key="frame" x="280.33333333333331" y="110" width="126.66666666666669" height="70"/>
                                         <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="rSm-zD-7d1"/>
@@ -65,15 +65,26 @@
                                             <action selector="nextBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cJW-ye-Rno"/>
                                         </connections>
                                     </button>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8JY-UQ-JCv">
+                                        <rect key="frame" x="28" y="10" width="358" height="31"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="sliderChangedAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="ozS-XJ-zoV"/>
+                                        </connections>
+                                    </slider>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="ETh-Vp-hzC" secondAttribute="bottom" id="0Fv-B2-hrS"/>
+                                    <constraint firstItem="8JY-UQ-JCv" firstAttribute="leading" secondItem="wZ1-Ml-oif" secondAttribute="leading" constant="30" id="5DB-kt-1xf"/>
                                     <constraint firstItem="ppI-Vc-AHg" firstAttribute="width" secondItem="wZ1-Ml-oif" secondAttribute="width" multiplier="0.33" constant="-10" id="Dtw-O7-RGh"/>
                                     <constraint firstItem="ppI-Vc-AHg" firstAttribute="leading" secondItem="wZ1-Ml-oif" secondAttribute="leading" constant="7" id="Hys-XZ-0aF"/>
                                     <constraint firstAttribute="bottom" secondItem="ppI-Vc-AHg" secondAttribute="bottom" id="I6j-bF-pSg"/>
-                                    <constraint firstAttribute="height" constant="70" id="LS3-nk-Mjb"/>
+                                    <constraint firstAttribute="height" constant="180" id="LS3-nk-Mjb"/>
+                                    <constraint firstItem="ETh-Vp-hzC" firstAttribute="top" secondItem="8JY-UQ-JCv" secondAttribute="bottom" constant="70" id="Lt4-p3-AWL"/>
                                     <constraint firstItem="ETh-Vp-hzC" firstAttribute="leading" secondItem="ppI-Vc-AHg" secondAttribute="trailing" constant="10" id="O66-Lo-kbC"/>
+                                    <constraint firstAttribute="trailing" secondItem="8JY-UQ-JCv" secondAttribute="trailing" constant="30" id="Ogc-Hg-QTE"/>
                                     <constraint firstItem="Vv3-rP-z3G" firstAttribute="width" secondItem="wZ1-Ml-oif" secondAttribute="width" multiplier="0.33" constant="-10" id="RIi-hO-h7g"/>
                                     <constraint firstItem="Vv3-rP-z3G" firstAttribute="leading" secondItem="ETh-Vp-hzC" secondAttribute="trailing" constant="10" id="Xxj-lq-c6l"/>
                                     <constraint firstAttribute="bottom" secondItem="Vv3-rP-z3G" secondAttribute="bottom" id="gaP-52-wMj"/>
@@ -94,6 +105,7 @@
                         <outlet property="nextBtn" destination="Vv3-rP-z3G" id="pFB-3x-o9n"/>
                         <outlet property="playBtn" destination="ETh-Vp-hzC" id="Vxr-f9-DJ3"/>
                         <outlet property="previousBtn" destination="ppI-Vc-AHg" id="dhO-wZ-fAg"/>
+                        <outlet property="slider" destination="8JY-UQ-JCv" id="lVP-G5-bQI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

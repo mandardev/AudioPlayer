@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     let BTN_CORNER_RADIUS : CGFloat = 15
     let BTN_BORDER_WIDTH : CGFloat = 1
 
+    @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var playBtn: UIButton!
     @IBOutlet weak var nextBtn: UIButton!
@@ -44,6 +45,40 @@ class ViewController: UIViewController {
         playBtn.layer.borderColor = UIColor.white.cgColor
         nextBtn.layer.borderColor = UIColor.white.cgColor
         previousBtn.layer.borderColor = UIColor.white.cgColor
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(sliderTapped(gestureRecognizer:)))
+        self.slider.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    func updateView() {
+        switch currentSongIndex {
+            
+        case arrayOfSongs.count-1:
+            nextBtn.isUserInteractionEnabled = false
+            nextBtn.alpha = 0.5
+            
+        case 0:
+            previousBtn.isUserInteractionEnabled = false
+            previousBtn.alpha = 0.5
+            
+        default:
+            nextBtn.alpha = 1
+            previousBtn.isUserInteractionEnabled = true
+            previousBtn.alpha = 1
+            nextBtn.isUserInteractionEnabled = true
+            nextBtn.alpha = 1
+        }
+    }
+    
+    func setUpAudioPlayerWithResource(resource : String) {
+        do{
+            audioPlayer = try AVAudioPlayer.init(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: resource, ofType: ".mp3")!, isDirectory: true), fileTypeHint: "")
+        }catch{
+            print(error)
+        }
+        audioPlayer!.prepareToPlay()
+        Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
+        slider.maximumValue = Float(audioPlayer!.duration)
     }
 
     @IBAction func previousBtnAction(_ sender: Any) {
@@ -72,31 +107,37 @@ class ViewController: UIViewController {
         playBtn.setTitle(PLAY_ICON, for: .normal)
     }
     
-    func updateView() {
-        switch currentSongIndex {
-        case arrayOfSongs.count-1:
-            nextBtn.isUserInteractionEnabled = false
-            nextBtn.alpha = 0.5
-            
-        case 0:
-            previousBtn.isUserInteractionEnabled = false
-            previousBtn.alpha = 0.5
-        default:
-            nextBtn.alpha = 1
-            previousBtn.isUserInteractionEnabled = true
-            previousBtn.alpha = 1
-            nextBtn.isUserInteractionEnabled = true
-            nextBtn.alpha = 1
-        }
+    @IBAction func sliderTouchAction(_ sender: Any) {
+        audioPlayer!.stop()
+        audioPlayer!.currentTime = TimeInterval(slider.value)
+        audioPlayer!.prepareToPlay()
+        audioPlayer!.play()
+        playBtn.setTitle(PLAY_ICON, for: .normal)
     }
     
-    func setUpAudioPlayerWithResource(resource : String) {
-        do{
-            audioPlayer = try AVAudioPlayer.init(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: resource, ofType: ".mp3")!, isDirectory: true), fileTypeHint: "")
-        }catch{
-            print(error)
-        }
+    @IBAction func sliderChangedAction(_ sender: Any) {
+        self.actionForSliderChange()
+    }
+    
+    @objc func sliderTapped(gestureRecognizer: UIGestureRecognizer) {
+        let pointTapped: CGPoint = gestureRecognizer.location(in: self.view)
+        let positionOfSlider: CGPoint = slider.frame.origin
+        let widthOfSlider: CGFloat = slider.frame.size.width
+        let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(slider.maximumValue) / widthOfSlider)
+        slider.setValue(Float(newValue), animated: true)
+        self.actionForSliderChange()
+    }
+    
+    func actionForSliderChange() {
+        audioPlayer!.stop()
+        audioPlayer!.currentTime = TimeInterval(slider.value)
         audioPlayer!.prepareToPlay()
+        audioPlayer!.play()
+        playBtn.setTitle(PLAY_ICON, for: .normal)
+    }
+    
+    @objc func updateSlider() {
+        slider.value = Float(audioPlayer!.currentTime)
     }
 }
 
