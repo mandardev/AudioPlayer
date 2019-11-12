@@ -73,20 +73,54 @@
                                             <action selector="sliderChangedAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="ozS-XJ-zoV"/>
                                         </connections>
                                     </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="start time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2zg-qf-6BO">
+                                        <rect key="frame" x="-3" y="45" width="66" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" priority="250" constant="40" id="Lg6-X7-xzl"/>
+                                            <constraint firstAttribute="height" constant="21" id="qvn-kI-mKa"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Y8-5b-gno">
+                                        <rect key="frame" x="354" y="45" width="60.333333333333314" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" priority="250" constant="42" id="POa-WN-sjN"/>
+                                            <constraint firstAttribute="height" constant="21" id="l1c-gb-LbX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        </variation>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="ETh-Vp-hzC" secondAttribute="bottom" id="0Fv-B2-hrS"/>
-                                    <constraint firstItem="8JY-UQ-JCv" firstAttribute="leading" secondItem="wZ1-Ml-oif" secondAttribute="leading" constant="30" id="5DB-kt-1xf"/>
+                                    <constraint firstItem="8JY-UQ-JCv" firstAttribute="leading" secondItem="wZ1-Ml-oif" secondAttribute="leading" constant="30" id="5DB-kt-1xf">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="50"/>
+                                    </constraint>
+                                    <constraint firstItem="2zg-qf-6BO" firstAttribute="top" secondItem="8JY-UQ-JCv" secondAttribute="bottom" constant="5" id="AKc-2F-blD"/>
                                     <constraint firstItem="ppI-Vc-AHg" firstAttribute="width" secondItem="wZ1-Ml-oif" secondAttribute="width" multiplier="0.33" constant="-10" id="Dtw-O7-RGh"/>
                                     <constraint firstItem="ppI-Vc-AHg" firstAttribute="leading" secondItem="wZ1-Ml-oif" secondAttribute="leading" constant="7" id="Hys-XZ-0aF"/>
                                     <constraint firstAttribute="bottom" secondItem="ppI-Vc-AHg" secondAttribute="bottom" id="I6j-bF-pSg"/>
                                     <constraint firstAttribute="height" constant="180" id="LS3-nk-Mjb"/>
+                                    <constraint firstItem="2zg-qf-6BO" firstAttribute="centerX" secondItem="8JY-UQ-JCv" secondAttribute="leading" id="Lqy-Z9-zGH"/>
                                     <constraint firstItem="ETh-Vp-hzC" firstAttribute="top" secondItem="8JY-UQ-JCv" secondAttribute="bottom" constant="70" id="Lt4-p3-AWL"/>
                                     <constraint firstItem="ETh-Vp-hzC" firstAttribute="leading" secondItem="ppI-Vc-AHg" secondAttribute="trailing" constant="10" id="O66-Lo-kbC"/>
-                                    <constraint firstAttribute="trailing" secondItem="8JY-UQ-JCv" secondAttribute="trailing" constant="30" id="Ogc-Hg-QTE"/>
+                                    <constraint firstAttribute="trailing" secondItem="8JY-UQ-JCv" secondAttribute="trailing" constant="30" id="Ogc-Hg-QTE">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="50"/>
+                                    </constraint>
                                     <constraint firstItem="Vv3-rP-z3G" firstAttribute="width" secondItem="wZ1-Ml-oif" secondAttribute="width" multiplier="0.33" constant="-10" id="RIi-hO-h7g"/>
                                     <constraint firstItem="Vv3-rP-z3G" firstAttribute="leading" secondItem="ETh-Vp-hzC" secondAttribute="trailing" constant="10" id="Xxj-lq-c6l"/>
+                                    <constraint firstItem="2Y8-5b-gno" firstAttribute="top" secondItem="8JY-UQ-JCv" secondAttribute="bottom" constant="5" id="bpi-0i-5Gh"/>
+                                    <constraint firstItem="2Y8-5b-gno" firstAttribute="centerX" secondItem="8JY-UQ-JCv" secondAttribute="trailing" id="cl7-0A-M4Q"/>
                                     <constraint firstAttribute="bottom" secondItem="Vv3-rP-z3G" secondAttribute="bottom" id="gaP-52-wMj"/>
                                     <constraint firstItem="ETh-Vp-hzC" firstAttribute="width" secondItem="wZ1-Ml-oif" secondAttribute="width" multiplier="0.33" constant="-10" id="hsi-M7-kpP"/>
                                 </constraints>
@@ -102,15 +136,17 @@
                     </view>
                     <connections>
                         <outlet property="containerView" destination="wZ1-Ml-oif" id="lFe-cH-RtB"/>
+                        <outlet property="currentTimeLbl" destination="2zg-qf-6BO" id="86b-Ve-TQ7"/>
                         <outlet property="nextBtn" destination="Vv3-rP-z3G" id="pFB-3x-o9n"/>
                         <outlet property="playBtn" destination="ETh-Vp-hzC" id="Vxr-f9-DJ3"/>
                         <outlet property="previousBtn" destination="ppI-Vc-AHg" id="dhO-wZ-fAg"/>
                         <outlet property="slider" destination="8JY-UQ-JCv" id="lVP-G5-bQI"/>
+                        <outlet property="totalTimeLabel" destination="2Y8-5b-gno" id="Dhb-f4-roj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="116"/>
+            <point key="canvasLocation" x="137.68115942028987" y="115.84821428571428"/>
         </scene>
     </scenes>
 </document>
