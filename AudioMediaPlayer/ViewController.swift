@@ -14,7 +14,7 @@ class ViewController: UIViewController,AVAudioPlayerDelegate {
     
     @IBOutlet weak var previousBtn: UIButton!
     var audioPlayer : AVAudioPlayer?
-    let arrayOfSongs : [String] = ["Saki Saki","Jogi","Bekhayali"]
+    let arrayOfSongs : [String] = ["Saki Saki","Jogi","Bekhayali","Duniyaa (Luka Chuppi)","Tukur Tukur (Dilwale)"]
     var currentSongIndex : Int = 0
     let PAUSE_ICON : String = "f"
     let PLAY_ICON : String = "e"
@@ -23,6 +23,7 @@ class ViewController: UIViewController,AVAudioPlayerDelegate {
     let BTN_CORNER_RADIUS : CGFloat = 15
     let BTN_BORDER_WIDTH : CGFloat = 1
 
+    @IBOutlet weak var songTitle: UILabel!
     @IBOutlet weak var audioImageView: UIImageView!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var containerView: UIView!
@@ -59,6 +60,7 @@ class ViewController: UIViewController,AVAudioPlayerDelegate {
                 print(item.commonKey!)
                 if item.commonKey!.rawValue == "title" {
                     print(stringValue)
+                    songTitle.text=stringValue
                 }
                 if item.commonKey!.rawValue == "artist" {
                     print(stringValue)
@@ -88,6 +90,11 @@ class ViewController: UIViewController,AVAudioPlayerDelegate {
         playBtn.layer.borderColor = UIColor.white.cgColor
         nextBtn.layer.borderColor = UIColor.white.cgColor
         previousBtn.layer.borderColor = UIColor.white.cgColor
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = view.bounds
+        gradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
+        view.layer.insertSublayer(gradient, at: 0)
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(sliderTapped(gestureRecognizer:)))
         self.slider.addGestureRecognizer(tapGestureRecognizer)
@@ -192,11 +199,9 @@ class ViewController: UIViewController,AVAudioPlayerDelegate {
 }
 
 extension UILabel{
-
     func getTimeString(from duration:Double) -> String{
         let hours   = Int(duration / 3600)
         let minutes = Int(duration / 60) % 60
-
         let seconds = Int(duration.truncatingRemainder(dividingBy: 60))
         if hours > 0 {
             return String(format: "%i:%02i:%02i", arguments: [hours,minutes,seconds])

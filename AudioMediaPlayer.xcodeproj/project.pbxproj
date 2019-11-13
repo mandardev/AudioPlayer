@@ -19,6 +19,9 @@
 		9B13C633237872BB0064F83A /* untitled-font-1.ttf in Sources */ = {isa = PBXBuildFile; fileRef = 9B13C631237872A60064F83A /* untitled-font-1.ttf */; };
 		9B13C6352378785A0064F83A /* Jogi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9B13C6342378785A0064F83A /* Jogi.mp3 */; };
 		9B13C638237879410064F83A /* Bekhayali.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9B13C637237879410064F83A /* Bekhayali.mp3 */; };
+		9BBC2F61237C7AF400D39893 /* Duniyaa (Luka Chuppi).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9BBC2F60237C7AF400D39893 /* Duniyaa (Luka Chuppi).mp3 */; };
+		9BBC2F63237C7F6000D39893 /* Tukur Tukur (Dilwale).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9BBC2F62237C7F6000D39893 /* Tukur Tukur (Dilwale).mp3 */; };
+		9BBC2F65237C84D500D39893 /* musicplayer-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BBC2F64237C84D500D39893 /* musicplayer-icon.png */; };
 		9BD7F0772379D21D005B2B7E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BD7F0752379D0A6005B2B7E /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +39,9 @@
 		9B13C631237872A60064F83A /* untitled-font-1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "untitled-font-1.ttf"; sourceTree = "<group>"; };
 		9B13C6342378785A0064F83A /* Jogi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Jogi.mp3; sourceTree = "<group>"; };
 		9B13C637237879410064F83A /* Bekhayali.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Bekhayali.mp3; sourceTree = "<group>"; };
+		9BBC2F60237C7AF400D39893 /* Duniyaa (Luka Chuppi).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Duniyaa (Luka Chuppi).mp3"; path = "../../../../../Downloads/Duniyaa (Luka Chuppi).mp3"; sourceTree = "<group>"; };
+		9BBC2F62237C7F6000D39893 /* Tukur Tukur (Dilwale).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Tukur Tukur (Dilwale).mp3"; path = "../../../../../Downloads/Tukur Tukur (Dilwale).mp3"; sourceTree = "<group>"; };
+		9BBC2F64237C84D500D39893 /* musicplayer-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "musicplayer-icon.png"; path = "../../../../../Downloads/musicplayer-icon.png"; sourceTree = "<group>"; };
 		9BD7F0752379D0A6005B2B7E /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -97,6 +103,9 @@
 		9B13C6362378787C0064F83A /* AudioSongs */ = {
 			isa = PBXGroup;
 			children = (
+				9BBC2F64237C84D500D39893 /* musicplayer-icon.png */,
+				9BBC2F62237C7F6000D39893 /* Tukur Tukur (Dilwale).mp3 */,
+				9BBC2F60237C7AF400D39893 /* Duniyaa (Luka Chuppi).mp3 */,
 				9B13C62B2378638B0064F83A /* Saki Saki.mp3 */,
 				9B13C6342378785A0064F83A /* Jogi.mp3 */,
 				9B13C637237879410064F83A /* Bekhayali.mp3 */,
@@ -163,12 +172,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B13C621237861790064F83A /* LaunchScreen.storyboard in Resources */,
+				9BBC2F63237C7F6000D39893 /* Tukur Tukur (Dilwale).mp3 in Resources */,
+				9BBC2F61237C7AF400D39893 /* Duniyaa (Luka Chuppi).mp3 in Resources */,
 				9B13C61E237861790064F83A /* Assets.xcassets in Resources */,
 				9B13C62C2378638B0064F83A /* Saki Saki.mp3 in Resources */,
 				9B13C6352378785A0064F83A /* Jogi.mp3 in Resources */,
 				9B13C632237872A60064F83A /* untitled-font-1.ttf in Resources */,
 				9B13C638237879410064F83A /* Bekhayali.mp3 in Resources */,
 				9B13C61C237861770064F83A /* Main.storyboard in Resources */,
+				9BBC2F65237C84D500D39893 /* musicplayer-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
