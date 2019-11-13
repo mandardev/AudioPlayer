@@ -23,7 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9B13C611237861770064F83A /* MediaPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B13C611237861770064F83A /* AudioMediaPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioMediaPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B13C614237861770064F83A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B13C616237861770064F83A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9B13C618237861770064F83A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,7 +55,7 @@
 		9B13C608237861770064F83A = {
 			isa = PBXGroup;
 			children = (
-				9B13C613237861770064F83A /* MediaPlayer */,
+				9B13C613237861770064F83A /* AudioMediaPlayer */,
 				9B13C612237861770064F83A /* Products */,
 				9B13C628237862480064F83A /* Frameworks */,
 			);
@@ -64,12 +64,12 @@
 		9B13C612237861770064F83A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9B13C611237861770064F83A /* MediaPlayer.app */,
+				9B13C611237861770064F83A /* AudioMediaPlayer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9B13C613237861770064F83A /* MediaPlayer */ = {
+		9B13C613237861770064F83A /* AudioMediaPlayer */ = {
 			isa = PBXGroup;
 			children = (
 				9B13C6362378787C0064F83A /* AudioSongs */,
@@ -82,7 +82,7 @@
 				9B13C61F237861790064F83A /* LaunchScreen.storyboard */,
 				9B13C622237861790064F83A /* Info.plist */,
 			);
-			path = MediaPlayer;
+			path = AudioMediaPlayer;
 			sourceTree = "<group>";
 		};
 		9B13C628237862480064F83A /* Frameworks */ = {
@@ -107,9 +107,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9B13C610237861770064F83A /* MediaPlayer */ = {
+		9B13C610237861770064F83A /* AudioMediaPlayer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9B13C625237861790064F83A /* Build configuration list for PBXNativeTarget "MediaPlayer" */;
+			buildConfigurationList = 9B13C625237861790064F83A /* Build configuration list for PBXNativeTarget "AudioMediaPlayer" */;
 			buildPhases = (
 				9B13C60D237861770064F83A /* Sources */,
 				9B13C60E237861770064F83A /* Frameworks */,
@@ -119,9 +119,9 @@
 			);
 			dependencies = (
 			);
-			name = MediaPlayer;
+			name = AudioMediaPlayer;
 			productName = MediaPlayer;
-			productReference = 9B13C611237861770064F83A /* MediaPlayer.app */;
+			productReference = 9B13C611237861770064F83A /* AudioMediaPlayer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -139,7 +139,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9B13C60C237861770064F83A /* Build configuration list for PBXProject "MediaPlayer" */;
+			buildConfigurationList = 9B13C60C237861770064F83A /* Build configuration list for PBXProject "AudioMediaPlayer" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -152,7 +152,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9B13C610237861770064F83A /* MediaPlayer */,
+				9B13C610237861770064F83A /* AudioMediaPlayer */,
 			);
 		};
 /* End PBXProject section */
@@ -327,12 +327,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = MediaPlayer/Info.plist;
+				INFOPLIST_FILE = AudioMediaPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mandar.First.MediaPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mandar.First.AudioMediaPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -344,12 +344,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = MediaPlayer/Info.plist;
+				INFOPLIST_FILE = AudioMediaPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mandar.First.MediaPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mandar.First.AudioMediaPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -359,7 +359,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9B13C60C237861770064F83A /* Build configuration list for PBXProject "MediaPlayer" */ = {
+		9B13C60C237861770064F83A /* Build configuration list for PBXProject "AudioMediaPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9B13C623237861790064F83A /* Debug */,
@@ -368,7 +368,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9B13C625237861790064F83A /* Build configuration list for PBXNativeTarget "MediaPlayer" */ = {
+		9B13C625237861790064F83A /* Build configuration list for PBXNativeTarget "AudioMediaPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9B13C626237861790064F83A /* Debug */,

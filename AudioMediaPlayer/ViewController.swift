@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import MediaPlayer
 
 class ViewController: UIViewController,AVAudioPlayerDelegate {
     
@@ -22,6 +23,7 @@ class ViewController: UIViewController,AVAudioPlayerDelegate {
     let BTN_CORNER_RADIUS : CGFloat = 15
     let BTN_BORDER_WIDTH : CGFloat = 1
 
+    @IBOutlet weak var audioImageView: UIImageView!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var playBtn: UIButton!
@@ -38,14 +40,37 @@ class ViewController: UIViewController,AVAudioPlayerDelegate {
     func setUpAudioPlayerWithResource(resource : String) {
         do{
             audioPlayer = try AVAudioPlayer.init(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: resource, ofType: ".mp3")!, isDirectory: true), fileTypeHint: "")
+            self.setUpAudioInfoForResource(resource: resource)
+            audioPlayer?.delegate = self
+            audioPlayer!.prepareToPlay()
+            Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
+            slider.maximumValue = Float(audioPlayer!.duration)
+            totalTimeLabel.text = totalTimeLabel.getTimeString(from: Double(slider!.maximumValue))
         }catch{
             print(error)
         }
-        audioPlayer?.delegate = self
-        audioPlayer!.prepareToPlay()
-        Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
-        slider.maximumValue = Float(audioPlayer!.duration)
-        totalTimeLabel.text = totalTimeLabel.getTimeString(from: Double(slider!.maximumValue))
+    }
+    
+    func setUpAudioInfoForResource(resource:String) {
+        let playerItem = AVPlayerItem.init(url: URL(fileURLWithPath: Bundle.main.path(forResource: resource, ofType: ".mp3")!, isDirectory: true))
+        let metadataList:[AVMetadataItem] = playerItem.asset.commonMetadata
+        for item in metadataList {
+            if let stringValue = item.value as? String {
+                print(item.commonKey!)
+                if item.commonKey!.rawValue == "title" {
+                    print(stringValue)
+                }
+                if item.commonKey!.rawValue == "artist" {
+                    print(stringValue)
+                }
+            }
+            if item.commonKey!.rawValue == "artwork" {
+                if let audioImage = UIImage(data: item.value as! Data) {
+                    print(audioImage.description)
+                    audioImageView.image = audioImage
+                }
+            }
+        }
     }
     
 // MARK:- SetUp View Methods : 
