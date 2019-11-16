@@ -10,18 +10,18 @@ import UIKit
 import AVFoundation
 import MediaPlayer
 
-class ViewController: UIViewController,AVAudioPlayerDelegate {
-    
+class ViewController: UIViewController,CustomAudioPlayerDelagate {
+
     @IBOutlet weak var previousBtn: UIButton!
-    var audioPlayer : AVAudioPlayer?
+    var customAudioPlayer : AudioPlayerController?
     let arrayOfSongs : [String] = ["Saki Saki","Jogi","Bekhayali","Duniyaa (Luka Chuppi)","Tukur Tukur (Dilwale)"]
-    var currentSongIndex : Int = 0
     let PAUSE_ICON : String = "f"
     let PLAY_ICON : String = "e"
     let NEXT_ICON : String = "d"
     let PREV_ICON : String = "a"
     let BTN_CORNER_RADIUS : CGFloat = 15
     let BTN_BORDER_WIDTH : CGFloat = 1
+    var audioTimer : Timer?
 
     @IBOutlet weak var songTitle: UILabel!
     @IBOutlet weak var audioImageView: UIImageView!
@@ -34,45 +34,9 @@ class ViewController: UIViewController,AVAudioPlayerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setUpAudioPlayerWithResource(resource: arrayOfSongs[0])
+        customAudioPlayer = AudioPlayerController.init(audios: arrayOfSongs)
+        customAudioPlayer?.delegate=self
         self.initialSetUp()
-    }
-    
-    func setUpAudioPlayerWithResource(resource : String) {
-        do{
-            audioPlayer = try AVAudioPlayer.init(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: resource, ofType: ".mp3")!, isDirectory: true), fileTypeHint: "")
-            self.setUpAudioInfoForResource(resource: resource)
-            audioPlayer?.delegate = self
-            audioPlayer!.prepareToPlay()
-            Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
-            slider.maximumValue = Float(audioPlayer!.duration)
-            totalTimeLabel.text = totalTimeLabel.getTimeString(from: Double(slider!.maximumValue))
-        }catch{
-            print(error)
-        }
-    }
-    
-    func setUpAudioInfoForResource(resource:String) {
-        let playerItem = AVPlayerItem.init(url: URL(fileURLWithPath: Bundle.main.path(forResource: resource, ofType: ".mp3")!, isDirectory: true))
-        let metadataList:[AVMetadataItem] = playerItem.asset.commonMetadata
-        for item in metadataList {
-            if let stringValue = item.value as? String {
-                print(item.commonKey!)
-                if item.commonKey!.rawValue == "title" {
-                    print(stringValue)
-                    songTitle.text=stringValue
-                }
-                if item.commonKey!.rawValue == "artist" {
-                    print(stringValue)
-                }
-            }
-            if item.commonKey!.rawValue == "artwork" {
-                if let audioImage = UIImage(data: item.value as! Data) {
-                    print(audioImage.description)
-                    audioImageView.image = audioImage
-                }
-            }
-        }
     }
     
 // MARK:- SetUp View Methods : 
@@ -98,10 +62,43 @@ class ViewController: UIViewController,AVAudioPlayerDelegate {
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(sliderTapped(gestureRecognizer:)))
         self.slider.addGestureRecognizer(tapGestureRecognizer)
+        self.getAndSetMetadataForAudio()
+    }
+    
+    func activateTimer() {
+        if(audioTimer == nil){
+            audioTimer =  Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
+        }
+    }
+    
+    func deactivateTimer() {
+        audioTimer = nil
+    }
+    
+    func getAndSetMetadataForAudio() {
+        for item in (customAudioPlayer!.playerItem?.asset.metadata)! {
+            if let stringValue = item.value as? String, let _ = item.commonKey {
+                if item.commonKey!.rawValue == "title" {
+                    print(stringValue)
+                    songTitle.text=stringValue
+                }
+                if item.commonKey!.rawValue == "artist" {
+                    print(stringValue)
+                }
+            }
+            if let _ = item.commonKey {
+                if item.commonKey!.rawValue == "artwork" {
+                    if let audioImage = UIImage(data: item.value as! Data) {
+                        print(audioImage.description)
+                        audioImageView.image = audioImage
+                    }
+                }
+            }
+        }
     }
     
     func updateView() {
-        switch currentSongIndex {
+        switch customAudioPlayer?.currentAudioIndex {
             
         case arrayOfSongs.count-1:
             nextBtn.isUserInteractionEnabled = false
@@ -118,37 +115,37 @@ class ViewController: UIViewController,AVAudioPlayerDelegate {
             nextBtn.isUserInteractionEnabled = true
             nextBtn.alpha = 1
         }
+        
+        slider.maximumValue = Float(customAudioPlayer!.player!.duration)
+        totalTimeLabel.text = totalTimeLabel.getTimeString(from: Double(slider!.maximumValue))
     }
     
 // MARK:- Actions For Media Controls
 
     @IBAction func previousBtnAction(_ sender: Any) {
-        currentSongIndex = currentSongIndex-1
-        self.updateView()
-        self.setUpAudioPlayerWithResource(resource: arrayOfSongs[currentSongIndex])
-        audioPlayer?.play()
-        playBtn.setTitle(PAUSE_ICON, for: .normal)
+        customAudioPlayer?.playPreviousAudio()
+        self.actionAfterSongChange()
     }
     
     @IBAction func playBtnAction(_ sender: Any) {
-        if audioPlayer!.isPlaying{
-            audioPlayer?.pause()
+        if customAudioPlayer!.player!.isPlaying{
+            customAudioPlayer?.player!.pause()
             playBtn.setTitle(PLAY_ICON, for: .normal)
+            self.deactivateTimer()
         }else{
-            audioPlayer?.play()
+            customAudioPlayer?.player!.play()
             playBtn.setTitle(PAUSE_ICON, for: .normal)
+            self.activateTimer()
         }
+        self.activateTimer()
     }
     
     @IBAction func nextBtnAction(_ sender: Any) {
-        self.actionForNextBrn()
+        self.actionForNextBtn()
     }
     
     @IBAction func sliderTouchAction(_ sender: Any) {
-        audioPlayer!.stop()
-        audioPlayer!.currentTime = TimeInterval(slider.value)
-        audioPlayer!.prepareToPlay()
-        audioPlayer!.play()
+        customAudioPlayer?.playAudioAtValue(value: slider.value)
         playBtn.setTitle(PAUSE_ICON, for: .normal)
     }
     
@@ -165,48 +162,36 @@ class ViewController: UIViewController,AVAudioPlayerDelegate {
         self.actionForSliderChange()
     }
     
-    func actionForNextBrn() {
-         currentSongIndex = currentSongIndex+1
-         self.updateView()
-         self.setUpAudioPlayerWithResource(resource: arrayOfSongs[currentSongIndex])
-         audioPlayer?.play()
-         playBtn.setTitle(PAUSE_ICON, for: .normal)
+    func actionForNextBtn() {
+        customAudioPlayer?.playNextAudio()
+        self.actionAfterSongChange()
+    }
+    
+    func actionAfterSongChange() {
+        playBtn.setTitle(PAUSE_ICON, for: .normal)
+        self.activateTimer()
+        self.updateView()
+        self.getAndSetMetadataForAudio()
     }
     
     func actionForSliderChange() {
-        audioPlayer!.stop()
-        audioPlayer!.currentTime = TimeInterval(slider.value)
-        audioPlayer!.prepareToPlay()
-        audioPlayer!.play()
+        customAudioPlayer?.playAudioAtValue(value: slider.value)
         playBtn.setTitle(PAUSE_ICON, for: .normal)
     }
     
     @objc func updateSlider() {
-        slider.value = Float(audioPlayer!.currentTime)
+        slider.value = Float(customAudioPlayer!.player!.currentTime)
         currentTimeLbl.text = currentTimeLbl.getTimeString(from: Double(slider!.value))
     }
     
 // MARK:- Audio Player Delegate Methos
     
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        if (currentSongIndex != arrayOfSongs.count-1){
-            self.actionForNextBrn()
-
+    func customAudioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        if (customAudioPlayer?.currentAudioIndex != arrayOfSongs.count-1){
+            self.actionForNextBtn()
         }else{
             playBtn.setTitle(PLAY_ICON, for: .normal)
-        }
-    }
-}
-
-extension UILabel{
-    func getTimeString(from duration:Double) -> String{
-        let hours   = Int(duration / 3600)
-        let minutes = Int(duration / 60) % 60
-        let seconds = Int(duration.truncatingRemainder(dividingBy: 60))
-        if hours > 0 {
-            return String(format: "%i:%02i:%02i", arguments: [hours,minutes,seconds])
-        }else {
-            return String(format: "%02i:%02i", arguments: [minutes,seconds])
+            self.deactivateTimer()
         }
     }
 }
