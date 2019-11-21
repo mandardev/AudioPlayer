@@ -18,17 +18,16 @@ protocol CustomAudioPlayerDelagate {
 
 class AudioPlayerController: UIViewController,AVAudioPlayerDelegate {
     
-    let arrayOfAudios : [String]
-    var player : AVAudioPlayer?
+    var audioURL : URL?
+    var player : AVAudioPlayer!
     var playerItem : AVPlayerItem?
-    var currentAudioIndex : Int = 0
     var currentTime : TimeInterval?
     var delegate : ViewController?
     
-    init(audios : [String]) {
-        arrayOfAudios = audios
+    init(audioURL : URL) {
         super.init(nibName: nil, bundle: nil)
-        self.setUpAudioPlayerWithResource(resource: arrayOfAudios[0])
+        self.audioURL=audioURL
+        self.setUpAudioPlayerWithURL(url: self.audioURL!)
     }
     
     required init?(coder: NSCoder) {
@@ -41,10 +40,10 @@ class AudioPlayerController: UIViewController,AVAudioPlayerDelegate {
     
 // MARK:- Initialize audioPlayer with Audio
     
-    private func setUpAudioPlayerWithResource(resource : String) {
+    private func setUpAudioPlayerWithURL(url : URL) {
         do{
-            player = try AVAudioPlayer.init(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: resource, ofType: ".mp3")!, isDirectory: true), fileTypeHint: "")
-            self.setPlayerItemForResource(resource: resource)
+            player = try AVAudioPlayer.init(contentsOf: url, fileTypeHint: "")
+            self.setPlayerItemForURL(url: url)
             player?.delegate = self
             player!.prepareToPlay()
         }catch{
@@ -54,22 +53,22 @@ class AudioPlayerController: UIViewController,AVAudioPlayerDelegate {
     
 // MARK:- Initialize audioPlayer Item with Audio
     
-    private func setPlayerItemForResource(resource:String) {
-        playerItem = AVPlayerItem.init(url: URL(fileURLWithPath: Bundle.main.path(forResource: resource, ofType: ".mp3")!, isDirectory: true))
+    private func setPlayerItemForURL(url:URL) {
+        playerItem = AVPlayerItem.init(url: url)
     }
     
 // MARK:- Play Previous Audio
-    func playPreviousAudio() {
-        currentAudioIndex = currentAudioIndex-1
-        self.setUpAudioPlayerWithResource(resource: arrayOfAudios[currentAudioIndex])
+    func playPreviousAudioWithURL(url:URL) {
+        audioURL = url
+        self.setUpAudioPlayerWithURL(url: audioURL!)
         player?.play()
     }
     
 // MARK:- Play Next Audio
 
-    func playNextAudio() {
-        currentAudioIndex = currentAudioIndex+1
-        self.setUpAudioPlayerWithResource(resource: arrayOfAudios[currentAudioIndex])
+    func playNextAudioWithURL(url:URL) {
+        audioURL = url
+        self.setUpAudioPlayerWithURL(url: audioURL!)
         player?.play()
     }
     

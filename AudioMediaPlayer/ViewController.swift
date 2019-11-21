@@ -22,6 +22,7 @@ class ViewController: UIViewController,CustomAudioPlayerDelagate {
     let BTN_CORNER_RADIUS : CGFloat = 15
     let BTN_BORDER_WIDTH : CGFloat = 1
     var audioTimer : Timer?
+    var currentAudioIndex : Int = 0
 
     @IBOutlet weak var songTitle: UILabel!
     @IBOutlet weak var audioImageView: UIImageView!
@@ -34,7 +35,8 @@ class ViewController: UIViewController,CustomAudioPlayerDelagate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        customAudioPlayer = AudioPlayerController.init(audios: arrayOfSongs)
+        let url = URL.init(fileURLWithPath: Bundle.main.path(forResource: arrayOfSongs[currentAudioIndex], ofType: ".mp3")!, isDirectory: true)
+        customAudioPlayer = AudioPlayerController.init(audioURL: url as URL)
         customAudioPlayer?.delegate=self
         self.initialSetUp()
     }
@@ -63,6 +65,7 @@ class ViewController: UIViewController,CustomAudioPlayerDelagate {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action:#selector(sliderTapped(gestureRecognizer:)))
         self.slider.addGestureRecognizer(tapGestureRecognizer)
         self.getAndSetMetadataForAudio()
+        self.updateSlider()
     }
     
     func activateTimer() {
@@ -77,16 +80,16 @@ class ViewController: UIViewController,CustomAudioPlayerDelagate {
     
     func getAndSetMetadataForAudio() {
         for item in (customAudioPlayer!.playerItem?.asset.metadata)! {
-            if let stringValue = item.value as? String, let _ = item.commonKey {
-                if item.commonKey!.rawValue == "title" {
-                    print(stringValue)
-                    songTitle.text=stringValue
-                }
-                if item.commonKey!.rawValue == "artist" {
-                    print(stringValue)
-                }
-            }
             if let _ = item.commonKey {
+                if let stringValue = item.value as? String {
+                    if item.commonKey!.rawValue == "title" {
+                        print(stringValue)
+                        songTitle.text=stringValue
+                    }
+                    if item.commonKey!.rawValue == "artist" {
+                        print(stringValue)
+                    }
+                }
                 if item.commonKey!.rawValue == "artwork" {
                     if let audioImage = UIImage(data: item.value as! Data) {
                         print(audioImage.description)
@@ -98,7 +101,7 @@ class ViewController: UIViewController,CustomAudioPlayerDelagate {
     }
     
     func updateView() {
-        switch customAudioPlayer?.currentAudioIndex {
+        switch self.currentAudioIndex {
             
         case arrayOfSongs.count-1:
             nextBtn.isUserInteractionEnabled = false
@@ -123,7 +126,9 @@ class ViewController: UIViewController,CustomAudioPlayerDelagate {
 // MARK:- Actions For Media Controls
 
     @IBAction func previousBtnAction(_ sender: Any) {
-        customAudioPlayer?.playPreviousAudio()
+        currentAudioIndex = currentAudioIndex-1
+        let url = URL.init(fileURLWithPath: Bundle.main.path(forResource: arrayOfSongs[currentAudioIndex], ofType: ".mp3")!, isDirectory: true)
+        customAudioPlayer?.playPreviousAudioWithURL(url: url)
         self.actionAfterSongChange()
     }
     
@@ -141,6 +146,7 @@ class ViewController: UIViewController,CustomAudioPlayerDelagate {
     }
     
     @IBAction func nextBtnAction(_ sender: Any) {
+        currentAudioIndex = currentAudioIndex+1
         self.actionForNextBtn()
     }
     
@@ -163,7 +169,8 @@ class ViewController: UIViewController,CustomAudioPlayerDelagate {
     }
     
     func actionForNextBtn() {
-        customAudioPlayer?.playNextAudio()
+        let url = URL.init(fileURLWithPath: Bundle.main.path(forResource: arrayOfSongs[currentAudioIndex], ofType: ".mp3")!, isDirectory: true)
+        customAudioPlayer?.playNextAudioWithURL(url: url)
         self.actionAfterSongChange()
     }
     
@@ -187,7 +194,7 @@ class ViewController: UIViewController,CustomAudioPlayerDelagate {
 // MARK:- Audio Player Delegate Methos
     
     func customAudioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        if (customAudioPlayer?.currentAudioIndex != arrayOfSongs.count-1){
+        if (self.currentAudioIndex != arrayOfSongs.count-1){
             self.actionForNextBtn()
         }else{
             playBtn.setTitle(PLAY_ICON, for: .normal)
